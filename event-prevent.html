@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 250px;
+        height: 250px;
+        background-color: yellow;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input type="checkbox" />
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+      //scrolling 될 때 마다 이벤트 출력
+      document.addEventListener(
+        'wheel',
+        (event) => {
+          console.log('scrolling');
+          event.preventDefault();
+          // [Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive.
+          // 스크롤링같은 반복적이고 빠르게 일어나는 이벤트를 취소할 수 없음
+        },
+        // pasive : boolean type 를 이용해 option을 추가하여 브라우저의 디폴트 이벤트를 취소할 수 있음 => active
+        { passive: false }
+        // 콘솔 오류가 뜨는 것에는 이유가 있다.. 굳이 사용하지 않는 것이 좋음
+      );
+      const checkbox = document.querySelector('input');
+      checkbox.addEventListener('click', (event) => {
+        // long
+        console.log('checked');
+        // event.preventDefault() : 브라우저에서 기본적으로 발생하는 동작을 취소함
+        // 체크박스의 체크는 동작하지 않고, 콘솔로그만 찍힘
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>
